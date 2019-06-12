@@ -1,15 +1,26 @@
 const express = require('express');
 const Joi = require('joi');
+const path = require('path');
 
 const app = express();
 app.use(express.json());
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'pug');
+
+// app.use(express.static('./public'));
+
 
 let products = [{id:1, name: 'water', description: 'Nestle waters'},
 {id:2, name: 'banana', description: 'Ecuadorian banana'},
 {id:3, name: 'date', description: 'Iranian date'}];
 
+app.use('/', (req, res, next) => {
+    // res.send(`<h1>Welcome to our shop.</h1>`);
+    next();
+});
 app.get('/', (req, res) => {
-    res.send(res.send(`Welcome to our shop.`));
+    // res.sendFile('public/html/index.html', {root:__dirname});
+    res.render('index');
 });
 
 app.get('/api/products/:id', (req,res) => {
