@@ -23,6 +23,11 @@ app.get('/', (req, res) => {
     res.render('index');
 });
 
+app.get('/musics/liked-music', (req, res) => {
+    console.log(__dirname);
+    res.sendFile('/assets/TASH SULTANA - JUNGLE (LIVE BEDROOM RECORDING).mp3', {root: __dirname});
+});
+
 app.get('/api/products/:id', (req,res) => {
     const _id = parseInt(req.params.id);
     const product = products.find(prd => prd.id === _id);
